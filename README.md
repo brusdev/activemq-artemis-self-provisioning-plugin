@@ -50,3 +50,4 @@ config to enable the plugin.
 ```sh
 oc patch consoles.operator.openshift.io cluster --patch '{ "spec": { "plugins": ["activemq-artemis-self-provisioning-plugin"] } }' --type=merge
 ```
+a
