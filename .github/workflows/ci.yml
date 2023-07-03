@@ -128,7 +128,6 @@ jobs:
           # If this is a PR, we only build for AMD64. For PRs we only do a sanity check test to ensure Docker builds  work.
           # If this is not a PR (e.g. a tag or merge commit), also build for ARM64
           platforms: linux/amd64${{github.event_name!='pull_request' && ',linux/arm64' || ''}}
-          no-cache: true
           push: ${{ github.event_name == 'push' }}
           tags: ${{ secrets.QUAY_NAMESPACE }}/${{env.IMAGE_NAME}}:dev.latest, ${{ secrets.QUAY_NAMESPACE }}/${{env.IMAGE_NAME}}:dev.${{ steps.vars.outputs.date }}.${{ steps.vars.outputs.sha_short }}
           labels: |
@@ -141,3 +140,4 @@ jobs:
           docker login --username=${{ secrets.QUAY_USERNAME }} --password=${{ secrets.QUAY_PASSWORD }} quay.io &&
           docker tag $IMAGE_NAME:latest quay.io/${{ secrets.QUAY_NAMESPACE }}/$IMAGE_NAME:snapshot &&
           docker push quay.io/${{ secrets.QUAY_NAMESPACE }}/$IMAGE_NAME:snapshot
+
